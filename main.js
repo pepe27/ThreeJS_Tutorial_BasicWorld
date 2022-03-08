@@ -112,15 +112,20 @@ class BasicWorldDemo {
 
     for (let x = -8; x < 8; x++) {
       for (let y = -8; y < 8; y++) {
-        const box = new THREE.Mesh(
-          new THREE.BoxGeometry(2, 2, 2),
-          new THREE.MeshStandardMaterial({
-              color: 0x808080,
+        const miniTor = new THREE.Mesh(
+          new THREE.TorusKnotGeometry( 4, 1, 10, 3 ),
+          new THREE.MeshPhysicalMaterial({
+            color: 0xFFFFFF,
+            clearcoat: 1.0,
+            clearcoatRoughness: 0.1,
+            metalness: 0.9,
+            roughness: 0.5,
+            color: 0xff00ff,
           }));
-        box.position.set(Math.random() + x * 5, Math.random() * 4.0 + 2.0, Math.random() + y * 5);
-        box.castShadow = true;
-        box.receiveShadow = true;
-        this._scene.add(box);
+          miniTor.position.set(Math.random() + x * 5, Math.random() * 4.0 + 2.0, Math.random() + y * 5);
+          miniTor.castShadow = true;
+          miniTor.receiveShadow = true;
+        this._scene.add(miniTor);
       }
     }
 
