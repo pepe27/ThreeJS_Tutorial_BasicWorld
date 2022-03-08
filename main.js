@@ -70,23 +70,45 @@ class BasicWorldDemo {
 
     const plane = new THREE.Mesh(
         new THREE.PlaneGeometry(100, 100, 10, 10),
-        new THREE.MeshStandardMaterial({
+        new THREE.MeshPhysicalMaterial({
             color: 0xFFFFFF,
+            clearcoat: 1.0,
+            clearcoatRoughness: 0.1,
+            metalness: 0.9,
+            roughness: 0.5,
+            color: 0x0000ff,
           }));
+
+    // const plane = new THREE.MeshPhysicalMaterial( {
+    //   clearcoat: 1.0,
+    //   clearcoatRoughness: 0.1,
+    //   metalness: 0.9,
+    //   roughness: 0.5,
+    //   color: 0x0000ff,
+    //   normalMap: normalMap3,
+    //   normalScale: new THREE.Vector2( 0.15, 0.15 )
+    // } );
+
+
     plane.castShadow = false;
     plane.receiveShadow = true;
     plane.rotation.x = -Math.PI / 2;
     this._scene.add(plane);
 
-    const box = new THREE.Mesh(
-      new THREE.BoxGeometry(2, 2, 2),
-      new THREE.MeshStandardMaterial({
-          color: 0xFFFFFF,
+    const torus = new THREE.Mesh(
+      new THREE.TorusKnotGeometry( 10, 3, 100, 16 ),
+      new THREE.MeshPhysicalMaterial({
+        color: 0xFFFFFF,
+        clearcoat: 1.0,
+        clearcoatRoughness: 0.1,
+        metalness: 0.9,
+        roughness: 0.5,
+        color: 0x0000ff,
       }));
-    box.position.set(0, 1, 0);
-    box.castShadow = true;
-    box.receiveShadow = true;
-    this._scene.add(box);
+      torus.position.set(0, 1, 0);
+      torus.castShadow = true;
+      torus.receiveShadow = true;
+    this._scene.add(torus);
 
     for (let x = -8; x < 8; x++) {
       for (let y = -8; y < 8; y++) {
